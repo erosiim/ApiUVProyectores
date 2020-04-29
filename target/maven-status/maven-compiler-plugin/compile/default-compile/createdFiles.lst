@@ -2,6 +2,8 @@ com/org/miuv/UsuariosResource.class
 com/org/miuv/TipoEquipoResource.class
 com/org/miuv/CarrerasResource.class
 com/org/models/TipoUsuario.class
+com/org/miuv/DaoApartados.class
+com/org/miuv/ApartadosResource.class
 com/org/models/Carrera.class
 com/org/models/TipoEquipo.class
 com/org/models/Apartado.class
@@ -9,10 +11,14 @@ com/org/miuv/ConnectionToDb.class
 com/org/miuv/IDao.class
 com/org/miuv/ApplicationConfig.class
 com/org/miuv/TipoUsuarioResource.class
+com/org/miuv/DaoLugares.class
 com/org/models/Equipo.class
+com/org/miuv/DaoEquipos.class
 com/org/miuv/DaoTipoUsuario.class
 com/org/models/Usuario.class
 com/org/models/Lugar.class
 com/org/miuv/DaoTipoEquipos.class
 com/org/miuv/DaoUsuarios.class
 com/org/miuv/DaoCarreras.class
+com/org/miuv/LugaresResource.class
+com/org/miuv/EquiposResource.class

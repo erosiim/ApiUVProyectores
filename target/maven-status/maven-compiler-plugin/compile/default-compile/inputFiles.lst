@@ -1,12 +1,16 @@
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/models/Carrera.java
+/home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/DaoEquipos.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/TipoEquipoResource.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/models/TipoEquipo.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/models/Equipo.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/DaoUsuarios.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/DaoTipoUsuario.java
+/home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/EquiposResource.java
+/home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/DaoLugares.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/models/Apartado.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/TipoUsuarioResource.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/ConnectionToDb.java
+/home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/ApartadosResource.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/models/Usuario.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/ApplicationConfig.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/UsuariosResource.java
@@ -14,5 +18,7 @@
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/DaoCarreras.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/DaoTipoEquipos.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/CarrerasResource.java
+/home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/DaoApartados.java
+/home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/miuv/LugaresResource.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/models/TipoUsuario.java
 /home/alsorc/NetBeansProjects/ApiRestMiUV/src/main/java/com/org/models/Lugar.java

@@ -35,7 +35,7 @@ public class ConnectionToDb implements Serializable{
     private ConnectionToDb() {        
         try {
             Class.forName("org.postgresql.Driver");
-            driverPostgres = DriverManager.getConnection("jdbc:postgresql://localhost/myaplicationuv",
+            driverPostgres = DriverManager.getConnection("jdbc:postgresql://34.68.160.10/myaplicationuv",
                     "postgres", "12334");
             Logger.getLogger(ConnectionToDb.class.getName()).log(Level.INFO, "Me conecté papu");
         } catch (SQLException | ClassNotFoundException ex) {
