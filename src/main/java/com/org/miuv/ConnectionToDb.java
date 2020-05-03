@@ -5,17 +5,12 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /*
 /*Autor: Carlos Alonso Escamilla Rocafuerte
-/*Fecha de modificación: 05/Marzo/2020
-/*Descripción: Clase conexión a una base de datos de nombre empleados que se encuentra 
-/*en un contenedor, mismo que está ligado através del puerto 7000 del host, se implementa 
-/*patrón singleton y se incluyen dos métodos para ejecutar sentencias sql.
 */
 public class ConnectionToDb implements Serializable{
     
