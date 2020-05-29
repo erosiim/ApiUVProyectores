@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author alsorc
  */
-@Path("Usuarios")
+@Path("usuarios")
 public class UsuariosResource {
     private IDao daoUsuario;
     private Usuario usuario;

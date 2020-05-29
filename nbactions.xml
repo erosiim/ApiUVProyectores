@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-sonar</actionName>
+            <displayName>sonar</displayName>
+            <goals>
+                <goal>sonar:sonar</goal>
+                <goal>-Dsonar.host.url=http://127.0.0.1:9001</goal>
+            </goals>
+        </action>
+    </actions>

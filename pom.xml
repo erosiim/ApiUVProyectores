@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mytry3</groupId>
-    <artifactId>ApiRestMiUV</artifactId>
-    <version>V0.0.1</version>
+    <artifactId>ApiRestMyKepp</artifactId>
+    <version>1.0</version>
     <packaging>war</packaging>
 
     <name>ApiRestMiUV</name>
@@ -50,6 +50,12 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4-1200-jdbc41</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>20.0</version>
         </dependency>
                 
     </dependencies>

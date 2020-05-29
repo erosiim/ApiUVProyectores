@@ -1,6 +1,8 @@
 package com.org.miuv;
 
+import com.google.common.hash.Hashing;
 import com.org.models.Usuario;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +20,16 @@ public class DaoUsuarios implements IDao<Usuario>{
     private transient  Connection driverPostgres;
     private boolean successQuery = false;
     private transient  PreparedStatement preQuery;
+    
+    
+    private  String encryptPasword(String pass){
+        String sha256hex = Hashing.sha256()
+                .hashString(pass, StandardCharsets.UTF_8)
+                .toString();
+        return sha256hex;
+    }
+    
+    
 
     public DaoUsuarios() {
         driverPostgres = ConnectionToDb.getInstance().getDriver();
@@ -25,10 +37,10 @@ public class DaoUsuarios implements IDao<Usuario>{
     
     private String getStatement(int statementOption){
         String[] statements = new String[]{
-                            "INSERT INTO usuarios  VALUES (?,?,?,?,?,?,?);",
+                            "INSERT INTO usuarios  VALUES (?,?,?,?,?,?,?,?);",
                             "DELETE FROM usuarios WHERE (matricula = ?);",
                             "UPDATE usuarios SET id_tipos_usuario = ?, id_carrera = ?, nombre = ?, apellido_paterno = ?,"
-                        + "apellido_materno =?, contrasena = ? WHERE (matricula = ?);",
+                            + "apellido_materno =?, contrasena = ?, grupo = ? WHERE (matricula = ?);",
                             "SELECT * FROM usuarios WHERE (matricula = ?);",
                             "SELECT * FROM usuarios;"};
             return statements[statementOption];
@@ -46,6 +58,7 @@ public class DaoUsuarios implements IDao<Usuario>{
                     preQuery.setString(5, values[4]);
                     preQuery.setString(6, values[5]);
                     preQuery.setString(7, values[6]);
+                    preQuery.setString(8, values[7]);
                     break;
                 case 1:
                     preQuery.setString(1, values[0]);
@@ -57,7 +70,8 @@ public class DaoUsuarios implements IDao<Usuario>{
                     preQuery.setString(4,values[4]);
                     preQuery.setString(5,values[5]);
                     preQuery.setString(6,values[6]);
-                    preQuery.setString(7,values[0]);
+                    preQuery.setString(7,values[6]);
+                    preQuery.setString(8,values[0]);
                     break;
                 default:
                     System.err.println("No elegiste una opción válida");
@@ -92,7 +106,7 @@ public class DaoUsuarios implements IDao<Usuario>{
     
     @Override
     public boolean insertRecord(Usuario t) {
-        String values[] = {t.getMatricula(), t.getIdTipoUsuario(), t.getIdCarrera(), t.getNombre(), t.getApellidoPaterno(), t.getApellidoMaterno(), t.getContrasena()};
+        String values[] = {t.getMatricula(), t.getIdTipoUsuario(), t.getIdCarrera(), t.getNombre(), t.getApellidoPaterno(), t.getApellidoMaterno(), encryptPasword(t.getContrasena()), t.getGrupo()};
         return updateTable(getStatement(0), 0, values);
     }
 
@@ -104,7 +118,7 @@ public class DaoUsuarios implements IDao<Usuario>{
 
     @Override
     public boolean updateRecord(Usuario t) {
-        String values[] = {t.getMatricula(), t.getIdTipoUsuario(), t.getIdCarrera(), t.getNombre(), t.getApellidoPaterno(), t.getApellidoMaterno(), t.getContrasena()};
+        String values[] = {t.getMatricula(), t.getIdTipoUsuario(), t.getIdCarrera(), t.getNombre(), t.getApellidoPaterno(), t.getApellidoMaterno(), t.getContrasena(), t.getGrupo()};
         return updateTable(getStatement(2), 2, values);
     }
 
@@ -122,6 +136,7 @@ public class DaoUsuarios implements IDao<Usuario>{
                 usuario.setApellidoPaterno(data.getString(5));
                 usuario.setApellidoMaterno(data.getString(6));
                 usuario.setContrasena(data.getString(7));
+                usuario.setGrupo(data.getString(8));
                 listaUsuarios.add(usuario);
             }
         } catch (SQLException ex) {
@@ -142,6 +157,7 @@ public class DaoUsuarios implements IDao<Usuario>{
                 t.setApellidoPaterno(data.getString(5));
                 t.setApellidoMaterno(data.getString(6));
                 t.setContrasena(data.getString(7));
+                t.setGrupo(data.getString(8));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DaoUsuarios.class.getName()).log(Level.SEVERE, null, ex);

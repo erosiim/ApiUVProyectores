@@ -12,7 +12,16 @@ public class Usuario {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String contrasena;
+    private String grupo;
 
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+    
     public String getMatricula() {
         return matricula;
     }
