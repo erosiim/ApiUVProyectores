@@ -156,7 +156,7 @@ public class DaoUsuarios implements IDao<Usuario>{
                 t.setNombre(data.getString(4));
                 t.setApellidoPaterno(data.getString(5));
                 t.setApellidoMaterno(data.getString(6));
-                t.setContrasena(encryptPasword(data.getString(7)));
+                t.setContrasena(data.getString(7));
                 t.setGrupo(data.getString(8));
             }
         } catch (SQLException ex) {
