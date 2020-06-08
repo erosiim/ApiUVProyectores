@@ -28,7 +28,7 @@ public class DaoEquipos implements IDao<Equipo>{
         String[] statements = new String[]{
                             "INSERT INTO equipos VALUES (?,?,?);",
                             "DELETE FROM equipos WHERE (id_equipo= ?);",
-                            "UPDATE equipos SET id_tipos_quipo = ?, serial = ? WHERE (id_equipo = ?);",
+                            "UPDATE equipos SET id_tipos_quipo = ?, serial = ?, estado = ? WHERE (id_equipo = ?);",
                             "SELECT * FROM equipos WHERE (id_equipo = ?);",
                             "SELECT * FROM equipos;"};
             return statements[statementOption];
@@ -48,7 +48,8 @@ public class DaoEquipos implements IDao<Equipo>{
                 case 2:
                     preQuery.setString(1,values[1]);
                     preQuery.setString(2,values[2]);
-                    preQuery.setString(3,values[0]);
+                    preQuery.setString(3,values[3]);
+                    preQuery.setString(4,values[0]);
                     break;
                 default:
                     System.err.println("No elegiste una opción válida");
@@ -92,7 +93,7 @@ public class DaoEquipos implements IDao<Equipo>{
 
     @Override
     public boolean updateRecord(Equipo t) {
-        String values [] = {t.getIdEquipo(), t.getIdTipoEquipo(), t.getSerial()};
+        String values [] = {t.getIdEquipo(), t.getIdTipoEquipo(), t.getSerial(), t.getEstado()};
         return updateTable(getStatement(2), 2, values);
     }
 
@@ -106,6 +107,7 @@ public class DaoEquipos implements IDao<Equipo>{
                  equipo.setIdEquipo(data.getString(1));
                  equipo.setIdTipoEquipo(data.getString(2));
                  equipo.setSerial(data.getString(3));
+                 equipo.setEstado(data.getString(4));
                  listaEquipos.add(equipo);
              }} catch (SQLException ex) {
              Logger.getLogger(DaoEquipos.class.getName()).log(Level.SEVERE, null, ex);

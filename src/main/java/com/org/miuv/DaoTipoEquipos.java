@@ -109,7 +109,6 @@ public class DaoTipoEquipos implements IDao<TipoEquipo>{
                 tipoEquipo.setIdTipoEquipo(data.getString(1));
                 tipoEquipo.setNombre(data.getString(2));
                 tipoEquipo.setEntrada(data.getString(3));
-                tipoEquipo.setEstado(data.getString(4));
                 listaTipoEquipos.add(tipoEquipo);
             }
         } catch (SQLException ex) {

@@ -8,6 +8,16 @@ public class Equipo {
     private String idEquipo;
     private String idTipoEquipo;
     private String serial;
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
 
     public String getIdEquipo() {
         return idEquipo;

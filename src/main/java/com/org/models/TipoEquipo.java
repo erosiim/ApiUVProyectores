@@ -8,16 +8,7 @@ public class TipoEquipo {
     private String idTipoEquipo;
     private String nombre;
     private String entrada;
-    private String estado;
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
+    
     public String getIdTipoEquipo() {
         return idTipoEquipo;
     }
