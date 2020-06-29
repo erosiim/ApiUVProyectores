@@ -53,7 +53,7 @@ public class CarrerasResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Carrera getOneByID(@PathParam("id")String id) {
+    public Carrera getOneByID(@PathParam("id")int id) {
         carrera.setIdCarrera(id);
         return (Carrera)daoCarrera.getOneRecord(carrera);
         
@@ -83,7 +83,7 @@ public String insert(Carrera carrera){
 @DELETE
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("{id}")
-    public String deleteOne(@PathParam("id") String id){
+    public String deleteOne(@PathParam("id") int id){
         carrera.setIdCarrera(id);
         if(daoCarrera.deleteRecord(carrera))
             return succesMessage;

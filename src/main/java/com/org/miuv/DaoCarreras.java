@@ -40,15 +40,15 @@ public class DaoCarreras implements  IDao<Carrera>{
             preQuery = driverPostgres.prepareStatement(statement);
             switch(statementOption){
                 case 0:
-                    preQuery.setString(1, values[0]);
+                    preQuery.setInt(1, Integer.parseInt(values[0]));
                     preQuery.setString(2, values[1]);
                     break;
                 case 1:
-                    preQuery.setString(1, values[0]);
+                    preQuery.setInt(1, Integer.parseInt(values[0]));
                     break;
                 case 2:
                     preQuery.setString(1,values[1]);
-                    preQuery.setString(2,values[0]);
+                    preQuery.setInt(2, Integer.parseInt(values[0]));
                     break;
                 default:
                     System.err.println("No elegiste una opción válida");
@@ -62,13 +62,13 @@ public class DaoCarreras implements  IDao<Carrera>{
         return successQuery;
     }
     
-    public ResultSet getData(String statement, int statementOption,String id) {
+    public ResultSet getData(String statement, int statementOption,int id) {
         ResultSet data = null;
         try {
             preQuery = driverPostgres.prepareStatement(statement);
             
             if ( statementOption == 3)
-                preQuery.setString(1, id);
+                preQuery.setInt(1, id);
             
             data = preQuery.executeQuery();            
         } catch (SQLException ex) {
@@ -79,30 +79,30 @@ public class DaoCarreras implements  IDao<Carrera>{
     
     @Override
     public boolean insertRecord(Carrera t) {
-        String values [] = {t.getIdCarrera(), t.getNombre()};
+        String values [] = {String.valueOf(t.getIdCarrera()), t.getNombre()};
         return updateTable(getStatement(0),0 , values);
     }
 
     @Override
     public boolean deleteRecord(Carrera t) {
-        String values [] = {t.getIdCarrera()};
+        String values [] = {String.valueOf(t.getIdCarrera())};
         return updateTable(getStatement(1),1 , values);
     }
 
     @Override
     public boolean updateRecord(Carrera t) {
-        String values [] = {t.getIdCarrera(), t.getNombre()};
+        String values [] = {String.valueOf(t.getIdCarrera()), t.getNombre()};
         return updateTable(getStatement(2), 2, values);
     }
 
     @Override
     public List<Carrera> getRecords() {
         List<Carrera> listaCarreras = new ArrayList();
-        ResultSet data = getData(getStatement(4), 4, "");
+        ResultSet data = getData(getStatement(4), 4, 0);
         try{
             while(data.next()){
                 Carrera carrera = new Carrera();
-                carrera.setIdCarrera(data.getString(1));
+                carrera.setIdCarrera(data.getInt(1));
                 carrera.setNombre(data.getString(2));
                 listaCarreras.add(carrera);
                 System.err.println(carrera.getIdCarrera() + " " + carrera.getNombre());
@@ -118,7 +118,7 @@ public class DaoCarreras implements  IDao<Carrera>{
         ResultSet data = getData(getStatement(3), 3, t.getIdCarrera());
         try{
             if(data.next()){
-                t.setIdCarrera(data.getString(1));
+                t.setIdCarrera(data.getInt(1));
                 t.setNombre(data.getString(2));
                 System.err.println(t.getIdCarrera() + " " + t.getNombre());
             }

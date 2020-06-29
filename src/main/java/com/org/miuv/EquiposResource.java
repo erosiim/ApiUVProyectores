@@ -51,7 +51,7 @@ public class EquiposResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Equipo getOneByID(@PathParam("id")String id) {
+    public Equipo getOneByID(@PathParam("id")int id) {
         equipo.setIdEquipo(id);
         return (Equipo)daoEquipo.getOneRecord(equipo);
         
@@ -81,7 +81,7 @@ public String insert(Equipo equipo){
 @DELETE
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("{id}")
-    public String deleteOne(@PathParam("id") String id){
+    public String deleteOne(@PathParam("id") int id){
         equipo.setIdEquipo(id);
         if(daoEquipo.deleteRecord(equipo))
             return succesMessage;

@@ -5,15 +5,15 @@ package com.org.models;
  * @author alsorc
  */
 public class TipoEquipo {
-    private String idTipoEquipo;
+    private int idTipoEquipo;
     private String nombre;
     private String entrada;
-    
-    public String getIdTipoEquipo() {
+
+    public int getIdTipoEquipo() {
         return idTipoEquipo;
     }
 
-    public void setIdTipoEquipo(String idTipoEquipo) {
+    public void setIdTipoEquipo(int idTipoEquipo) {
         this.idTipoEquipo = idTipoEquipo;
     }
 

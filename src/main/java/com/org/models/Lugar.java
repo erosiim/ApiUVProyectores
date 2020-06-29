@@ -5,15 +5,15 @@ package com.org.models;
  * @author alsorc
  */
 public class Lugar {
-    private String idLugar;
+    private int idLugar;
     private String edificio;
     private String aula;
 
-    public String getIdLugar() {
+    public int getIdLugar() {
         return idLugar;
     }
 
-    public void setIdLugar(String idLugar) {
+    public void setIdLugar(int idLugar) {
         this.idLugar = idLugar;
     }
 

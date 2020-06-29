@@ -45,7 +45,7 @@ public class TipoUsuarioResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public TipoUsuario getOneByID(@PathParam("id")String id) {
+    public TipoUsuario getOneByID(@PathParam("id")int id) {
         tipoUsuario.setIdTipoUsuario(id);
         return (TipoUsuario)daoTipoUsuario.getOneRecord(tipoUsuario);
         
@@ -75,7 +75,7 @@ public String insert(TipoUsuario tipoUsuario){
 @DELETE
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/{id}")
-    public String deleteOne(@PathParam("id") String id){
+    public String deleteOne(@PathParam("id") int id){
         tipoUsuario.setIdTipoUsuario(id);
         if(daoTipoUsuario.deleteRecord(tipoUsuario))
             return succesMessage;

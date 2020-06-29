@@ -28,7 +28,7 @@ public class DaoEquipos implements IDao<Equipo>{
         String[] statements = new String[]{
                             "INSERT INTO equipos VALUES (?,?,?);",
                             "DELETE FROM equipos WHERE (id_equipo= ?);",
-                            "UPDATE equipos SET id_tipos_quipo = ?, serial = ?, estado = ? WHERE (id_equipo = ?);",
+                            "UPDATE equipos SET id_tipos_equipo = ?, serial = ?, estado = ? WHERE (id_equipo = ?);",
                             "SELECT * FROM equipos WHERE (id_equipo = ?);",
                             "SELECT * FROM equipos;"};
             return statements[statementOption];
@@ -38,18 +38,18 @@ public class DaoEquipos implements IDao<Equipo>{
             preQuery = driverPostgres.prepareStatement(statement);
             switch(statementOption){
                 case 0:
-                    preQuery.setString(1, values[0]);
-                    preQuery.setString(2, values[1]);
+                    preQuery.setInt(1, Integer.parseInt(values[0]));
+                    preQuery.setInt(2, Integer.parseInt(values[1]));
                     preQuery.setString(3, values[2]);
                     break;
                 case 1:
-                    preQuery.setString(1, values[0]);
+                    preQuery.setInt(1, Integer.parseInt(values[0]));
                     break;
                 case 2:
-                    preQuery.setString(1,values[1]);
+                    preQuery.setInt(1,Integer.parseInt(values[1]));
                     preQuery.setString(2,values[2]);
                     preQuery.setString(3,values[3]);
-                    preQuery.setString(4,values[0]);
+                    preQuery.setInt(4, Integer.parseInt(values[0]));
                     break;
                 default:
                     System.err.println("No elegiste una opción válida");
@@ -63,13 +63,13 @@ public class DaoEquipos implements IDao<Equipo>{
         return successQuery;
     }
     
-    public ResultSet getData(String statement, int statementOption,String id) {
+    public ResultSet getData(String statement, int statementOption,int id) {
         ResultSet data = null;
         try {
             preQuery = driverPostgres.prepareStatement(statement);
             
             if ( statementOption == 3)
-                preQuery.setString(1, id);
+                preQuery.setInt(1, id);
             
             data = preQuery.executeQuery();            
         } catch (SQLException ex) {
@@ -81,31 +81,31 @@ public class DaoEquipos implements IDao<Equipo>{
     
     @Override
     public boolean insertRecord(Equipo t) {
-        String values [] = {t.getIdEquipo(), t.getIdTipoEquipo(), t.getSerial()};
+        String values [] = {String.valueOf(t.getIdEquipo()), String.valueOf(t.getIdTipoEquipo()), t.getSerial()};
         return updateTable(getStatement(0), 0, values);
     }
 
     @Override
     public boolean deleteRecord(Equipo t) {
-        String values [] = {t.getIdEquipo()};
+        String values [] = {String.valueOf(t.getIdEquipo())};
         return updateTable(getStatement(1), 1, values);
     }
 
     @Override
     public boolean updateRecord(Equipo t) {
-        String values [] = {t.getIdEquipo(), t.getIdTipoEquipo(), t.getSerial(), t.getEstado()};
+        String values [] = {String.valueOf(t.getIdEquipo()), String.valueOf(t.getIdTipoEquipo()), t.getSerial(), t.getEstado()};
         return updateTable(getStatement(2), 2, values);
     }
 
     @Override
     public List<Equipo> getRecords() {
         List<Equipo> listaEquipos = new ArrayList();
-        ResultSet data = getData(getStatement(4), 4, "");
+        ResultSet data = getData(getStatement(4), 4, 0);
          try {
              while(data.next()){
                  Equipo equipo = new Equipo();
-                 equipo.setIdEquipo(data.getString(1));
-                 equipo.setIdTipoEquipo(data.getString(2));
+                 equipo.setIdEquipo(data.getInt(1));
+                 equipo.setIdTipoEquipo(data.getInt(2));
                  equipo.setSerial(data.getString(3));
                  equipo.setEstado(data.getString(4));
                  listaEquipos.add(equipo);
@@ -120,8 +120,8 @@ public class DaoEquipos implements IDao<Equipo>{
         ResultSet data = getData(getStatement(3), 3, t.getIdEquipo());
          try {
              if(data.next()){
-                 t.setIdEquipo(data.getString(1));
-                 t.setIdTipoEquipo(data.getString(2));
+                 t.setIdEquipo(data.getInt(1));
+                 t.setIdTipoEquipo(data.getInt(2));
                  t.setSerial(data.getString(3));
              }} catch (SQLException ex) {
              Logger.getLogger(DaoEquipos.class.getName()).log(Level.SEVERE, null, ex);

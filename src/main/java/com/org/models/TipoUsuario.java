@@ -5,17 +5,18 @@ package com.org.models;
  * @author alsorc
  */
 public class TipoUsuario {
-    private String idTipoUsuario;
+    private int idTipoUsuario;
     private String tipo;
 
-    public String getIdTipoUsuario() {
+    public int getIdTipoUsuario() {
         return idTipoUsuario;
     }
 
-    public void setIdTipoUsuario(String idTipoUsuario) {
+    public void setIdTipoUsuario(int idTipoUsuario) {
         this.idTipoUsuario = idTipoUsuario;
     }
 
+   
     public String getTipo() {
         return tipo;
     }

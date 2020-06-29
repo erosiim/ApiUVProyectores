@@ -26,10 +26,10 @@ public class DaoApartados implements IDao<Apartado>{
     
     private String getStatement(int statementOption){
         String[] statements = new String[]{
-                            "INSERT INTO apartados (matricula, id_equipo, id_lugar, grupo, fecha, hora_inicio, hora_final) VALUES (?,?,?,?,?,?,?);",
+                            "INSERT INTO apartados (matricula, id_equipo, id_lugar, grupo, fecha, hora_inicio, hora_final, codigo_confirmacion, codigo_devolucion, estado) VALUES (?,?,?,?,?,?,?,?,?,?);",
                             "DELETE FROM apartados WHERE (id_apartado = ?);",
                             "UPDATE apartados SET matricula = ?, id_equipo = ?, id_lugar = ?, grupo = ?,"
-                        + "fecha =?, hora_inicio = ?, hora_final = ?  WHERE (id_apartado = ?);",
+                        +   "fecha =?, hora_inicio = ?, hora_final = ?, codigo_confirmacion = ?, codigo_devolucion = ?, estado = ?  WHERE (id_apartado = ?);",
                             "SELECT * FROM apartados WHERE (id_apartado = ?);",
                             "SELECT * FROM apartados;"};
             return statements[statementOption];
@@ -41,26 +41,32 @@ public class DaoApartados implements IDao<Apartado>{
             switch(statementOption){
                 case 0:
                     preQuery.setString(1, values[0]);
-                    preQuery.setString(2, values[1]);
-                    preQuery.setString(3, values[2]);
+                    preQuery.setInt(2, Integer.parseInt(values[1]));
+                    preQuery.setInt(3, Integer.parseInt(values[2]));
                     preQuery.setString(4, values[3]);
                     preQuery.setString(5, values[4]);
                     preQuery.setString(6, values[5]);
                     preQuery.setString(7, values[6]);
+                    preQuery.setInt(8, Integer.parseInt(values[7]));
+                    preQuery.setInt(9, Integer.parseInt(values[8]));
+                    preQuery.setString(10, values[9]);
                     //preQuery.setString(8, values[7]);
                     break;
                 case 1:
-                    preQuery.setString(1, values[0]);
+                    preQuery.setInt(1, Integer.parseInt(values[0]));
                     break;
                 case 2:
                     preQuery.setString(1,values[1]);
-                    preQuery.setString(2,values[2]);
-                    preQuery.setString(3,values[3]);
+                    preQuery.setInt(2,Integer.parseInt(values[2]));
+                    preQuery.setInt(3,Integer.parseInt(values[3]));
                     preQuery.setString(4,values[4]);
                     preQuery.setString(5,values[5]);
                     preQuery.setString(6,values[6]);
                     preQuery.setString(7,values[7]);
-                    preQuery.setInt(8,Integer.parseInt(values[0]));
+                    preQuery.setInt(8, Integer.parseInt(values[7]));
+                    preQuery.setInt(9, Integer.parseInt(values[7]));
+                    preQuery.setString(10,values[7]);
+                    preQuery.setInt(11,Integer.parseInt(values[0]));
                     break;
                 default:
                     System.err.println("No elegiste una opción válida");
@@ -93,7 +99,7 @@ public class DaoApartados implements IDao<Apartado>{
     
     @Override
     public boolean insertRecord(Apartado t) {
-        String values [] = { t.getMatricula(), t.getIdEquipo(), t.getIdLugar(), t.getGrupo(), t.getFecha(), t.getHoraInicio(), t.getHoraFinal() };
+        String values [] = { t.getMatricula(), String.valueOf(t.getIdEquipo()), String.valueOf(t.getIdLugar()), t.getGrupo(), t.getFecha(), t.getHoraInicio(), t.getHoraFinal(),  String.valueOf(t.getCodigoConfirmacion()), String.valueOf(t.getCodigoDevolucion()), t.getEstado()};
         return updateTable(getStatement(0), 0, values);
     }
 
@@ -105,7 +111,7 @@ public class DaoApartados implements IDao<Apartado>{
 
     @Override
     public boolean updateRecord(Apartado t) {
-        String values [] = {String.valueOf(t.getIdApartado()), t.getMatricula(), t.getIdEquipo(), t.getIdLugar(), t.getGrupo(), t.getFecha(), t.getHoraInicio(), t.getHoraFinal() };
+        String values [] = {String.valueOf(t.getIdApartado()), t.getMatricula(), String.valueOf(t.getIdEquipo()), String.valueOf(t.getIdLugar()), t.getGrupo(), t.getFecha(), t.getHoraInicio(), t.getHoraFinal(),  String.valueOf(t.getCodigoConfirmacion()), String.valueOf(t.getCodigoDevolucion()), t.getEstado() };
         return updateTable(getStatement(2), 2, values);
     }
 
@@ -118,8 +124,8 @@ public class DaoApartados implements IDao<Apartado>{
                 Apartado apartado = new Apartado();
                 apartado.setIdApartado(data.getInt(1));
                 apartado.setMatricula(data.getString(2));
-                apartado.setIdEquipo(data.getString(3));
-                apartado.setIdLugar(data.getString(4));
+                apartado.setIdEquipo(data.getInt(3));
+                apartado.setIdLugar(data.getInt(4));
                 apartado.setGrupo(data.getString(5));
                 apartado.setFecha(data.getString(6));
                 apartado.setHoraInicio(data.getString(7));
@@ -139,8 +145,8 @@ public class DaoApartados implements IDao<Apartado>{
             if(data.next()){
                  t.setIdApartado(data.getInt(1));
                 t.setMatricula(data.getString(2));
-                t.setIdEquipo(data.getString(3));
-                t.setIdLugar(data.getString(4));
+                t.setIdEquipo(data.getInt(3));
+                t.setIdLugar(data.getInt(4));
                 t.setGrupo(data.getString(5));
                 t.setFecha(data.getString(6));
                 t.setHoraInicio(data.getString(7));

@@ -5,14 +5,14 @@ package com.org.models;
  * @author alsorc
  */
 public class Carrera {
-    private String idCarrera;
+    private int idCarrera;
     private String nombre;
 
-    public String getIdCarrera() {
+    public int getIdCarrera() {
         return idCarrera;
     }
 
-    public void setIdCarrera(String idCarrera) {
+    public void setIdCarrera(int idCarrera) {
         this.idCarrera = idCarrera;
     }
 

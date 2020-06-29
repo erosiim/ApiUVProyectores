@@ -6,13 +6,31 @@ package com.org.models;
  */
 public class Usuario {
     private String matricula;
-    private String idTipoUsuario;
-    private String idCarrera;
+    private int idTipoUsuario;
+    private int idCarrera;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String contrasena;
     private String grupo;
+
+    public int getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(int idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
+    }
+
+    public int getIdCarrera() {
+        return idCarrera;
+    }
+
+    public void setIdCarrera(int idCarrera) {
+        this.idCarrera = idCarrera;
+    }
+    
+    
 
     public String getGrupo() {
         return grupo;
@@ -29,23 +47,7 @@ public class Usuario {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
-
-    public String getIdTipoUsuario() {
-        return idTipoUsuario;
-    }
-
-    public void setIdTipoUsuario(String idTipoUsuario) {
-        this.idTipoUsuario = idTipoUsuario;
-    }
-
-    public String getIdCarrera() {
-        return idCarrera;
-    }
-
-    public void setIdCarrera(String idCarrera) {
-        this.idCarrera = idCarrera;
-    }
-
+    
     public String getNombre() {
         return nombre;
     }

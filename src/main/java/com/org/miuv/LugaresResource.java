@@ -47,7 +47,7 @@ public class LugaresResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public Lugar getOneByID(@PathParam("id")String id) {
+    public Lugar getOneByID(@PathParam("id")int id) {
         lugar.setIdLugar(id);
         return (Lugar)daoLugar.getOneRecord(lugar);
         
@@ -77,7 +77,7 @@ public String insert(Lugar lugar){
 @DELETE
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("{id}")
-    public String deleteOne(@PathParam("id") String id){
+    public String deleteOne(@PathParam("id") int id){
         lugar.setIdLugar(id);
         if(daoLugar.deleteRecord(lugar))
             return succesMessage;

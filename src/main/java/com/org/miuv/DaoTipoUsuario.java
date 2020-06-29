@@ -39,15 +39,15 @@ public class DaoTipoUsuario implements IDao<TipoUsuario>{
             preQuery = driverPostgres.prepareStatement(statement);
             switch(statementOption){
                 case 0:
-                    preQuery.setString(1, values[0]);
+                    preQuery.setInt(1, Integer.valueOf(values[0]));
                     preQuery.setString(2, values[1]);
                     break;
                 case 1:
-                    preQuery.setString(1, values[0]);
+                    preQuery.setInt(1, Integer.valueOf(values[0]));
                     break;
                 case 2:
                     preQuery.setString(1,values[1]);
-                    preQuery.setString(2,values[0]);
+                    preQuery.setInt(2,Integer.parseInt(values[0]));
                     break;
                 default:
                     System.err.println("No elegiste una opción válida");
@@ -61,13 +61,13 @@ public class DaoTipoUsuario implements IDao<TipoUsuario>{
         return successQuery;
     }
     
-    public ResultSet getData(String statement, int statementOption,String id) {
+    public ResultSet getData(String statement, int statementOption,int id) {
         ResultSet data = null;
         try {
             preQuery = driverPostgres.prepareStatement(statement);
             
             if ( statementOption == 3)
-                preQuery.setString(1, id);
+                preQuery.setInt(1, id);
             
             data = preQuery.executeQuery();            
         } catch (SQLException ex) {
@@ -79,30 +79,30 @@ public class DaoTipoUsuario implements IDao<TipoUsuario>{
     
     @Override
     public boolean insertRecord(TipoUsuario t) {
-        String values [] = {t.getIdTipoUsuario(), t.getTipo()};
+        String values [] = {String.valueOf(t.getIdTipoUsuario()), t.getTipo()};
         return updateTable(getStatement(0), 0, values);
     }
 
     @Override
     public boolean deleteRecord(TipoUsuario t) {
-        String values [] = {t.getIdTipoUsuario()};
+        String values [] = {String.valueOf(t.getIdTipoUsuario())};
         return updateTable(getStatement(1), 1, values);
     }
 
     @Override
     public boolean updateRecord(TipoUsuario t) {
-        String values [] = {t.getIdTipoUsuario(), t.getTipo()};
+        String values [] = {String.valueOf(t.getIdTipoUsuario()), t.getTipo()};
         return updateTable(getStatement(2), 2, values);
     }
 
     @Override
     public List<TipoUsuario> getRecords() {
         List<TipoUsuario> miListaTipoUsuario = new ArrayList();
-        ResultSet data = getData(getStatement(4), 4, "");
+        ResultSet data = getData(getStatement(4), 4, 0);
         try {
             while(data.next()){
                 TipoUsuario tipo = new TipoUsuario();
-                tipo.setIdTipoUsuario(data.getString(1));
+                tipo.setIdTipoUsuario(data.getInt(1));
                 tipo.setTipo(data.getString(2));
                 miListaTipoUsuario.add(tipo);
             }
@@ -117,7 +117,7 @@ public class DaoTipoUsuario implements IDao<TipoUsuario>{
        ResultSet data = getData(getStatement(3), 3, t.getIdTipoUsuario());
         try {
             while(data.next()){
-                t.setIdTipoUsuario(data.getString(1));
+                t.setIdTipoUsuario(data.getInt(1));
                 t.setTipo(data.getString(2));
             }} catch (SQLException ex) {
             Logger.getLogger(DaoTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);

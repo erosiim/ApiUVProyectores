@@ -52,8 +52,8 @@ public class DaoUsuarios implements IDao<Usuario>{
             switch(statementOption){
                 case 0:
                     preQuery.setString(1, values[0]);
-                    preQuery.setString(2, values[1]);
-                    preQuery.setString(3, values[2]);
+                    preQuery.setInt(2, Integer.valueOf(values[1]));
+                    preQuery.setInt(3, Integer.valueOf(values[2]));
                     preQuery.setString(4, values[3]);
                     preQuery.setString(5, values[4]);
                     preQuery.setString(6, values[5]);
@@ -64,8 +64,8 @@ public class DaoUsuarios implements IDao<Usuario>{
                     preQuery.setString(1, values[0]);
                     break;
                 case 2:
-                    preQuery.setString(1,values[1]);
-                    preQuery.setString(2,values[2]);
+                    preQuery.setInt(1,Integer.valueOf(values[1]));
+                    preQuery.setInt(2, Integer.valueOf(values[2]));
                     preQuery.setString(3,values[3]);
                     preQuery.setString(4,values[4]);
                     preQuery.setString(5,values[5]);
@@ -99,14 +99,10 @@ public class DaoUsuarios implements IDao<Usuario>{
         }
         return data;
     }
-    
-    
-    
-    
-    
+     
     @Override
     public boolean insertRecord(Usuario t) {
-        String values[] = {t.getMatricula(), t.getIdTipoUsuario(), t.getIdCarrera(), t.getNombre(), t.getApellidoPaterno(), t.getApellidoMaterno(), encryptPasword(t.getContrasena()), t.getGrupo()};
+        String values[] = {t.getMatricula(), String.valueOf(t.getIdTipoUsuario()), String.valueOf(t.getIdCarrera()), t.getNombre(), t.getApellidoPaterno(), t.getApellidoMaterno(), encryptPasword(t.getContrasena()), t.getGrupo()};
         return updateTable(getStatement(0), 0, values);
     }
 
@@ -118,7 +114,7 @@ public class DaoUsuarios implements IDao<Usuario>{
 
     @Override
     public boolean updateRecord(Usuario t) {
-        String values[] = {t.getMatricula(), t.getIdTipoUsuario(), t.getIdCarrera(), t.getNombre(), t.getApellidoPaterno(), t.getApellidoMaterno(), t.getContrasena(), t.getGrupo()};
+        String values[] = {t.getMatricula(), String.valueOf(t.getIdTipoUsuario()), String.valueOf(t.getIdCarrera()), t.getNombre(), t.getApellidoPaterno(), t.getApellidoMaterno(), encryptPasword(t.getContrasena()), t.getGrupo()};
         return updateTable(getStatement(2), 2, values);
     }
 
@@ -128,10 +124,10 @@ public class DaoUsuarios implements IDao<Usuario>{
         ResultSet data = getData(getStatement(4), 4, "");
         try {
             while(data.next()){
-                Usuario usuario = new Usuario();
+                Usuario usuario = new Usuario();    
                 usuario.setMatricula(data.getString(1));
-                usuario.setIdTipoUsuario(data.getString(2));
-                usuario.setIdCarrera(data.getString(3));
+                usuario.setIdTipoUsuario(data.getInt(2));
+                usuario.setIdCarrera(data.getInt(3));
                 usuario.setNombre(data.getString(4));
                 usuario.setApellidoPaterno(data.getString(5));
                 usuario.setApellidoMaterno(data.getString(6));
@@ -151,8 +147,8 @@ public class DaoUsuarios implements IDao<Usuario>{
         try {
             if(data.next()){
                 t.setMatricula(data.getString(1));
-                t.setIdTipoUsuario(data.getString(2));
-                t.setIdCarrera(data.getString(3));
+                t.setIdTipoUsuario(data.getInt(2));
+                t.setIdCarrera(data.getInt(3));
                 t.setNombre(data.getString(4));
                 t.setApellidoPaterno(data.getString(5));
                 t.setApellidoMaterno(data.getString(6));

@@ -5,8 +5,8 @@ package com.org.models;
  * @author alsorc
  */
 public class Equipo {
-    private String idEquipo;
-    private String idTipoEquipo;
+    private int idEquipo;
+    private int idTipoEquipo;
     private String serial;
     private String estado;
 
@@ -18,22 +18,24 @@ public class Equipo {
         this.estado = estado;
     }
 
-
-    public String getIdEquipo() {
+    public int getIdEquipo() {
         return idEquipo;
     }
 
-    public void setIdEquipo(String idEquipo) {
+    public void setIdEquipo(int idEquipo) {
         this.idEquipo = idEquipo;
     }
 
-    public String getIdTipoEquipo() {
+    public int getIdTipoEquipo() {
         return idTipoEquipo;
     }
 
-    public void setIdTipoEquipo(String idTipoEquipo) {
+    public void setIdTipoEquipo(int idTipoEquipo) {
         this.idTipoEquipo = idTipoEquipo;
     }
+
+
+   
 
     public String getSerial() {
         return serial;
