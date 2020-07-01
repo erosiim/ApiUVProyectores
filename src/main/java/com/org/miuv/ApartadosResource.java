@@ -25,6 +25,7 @@ public class ApartadosResource {
     private Apartado apartado;
     private final String succesMessage = "OK";
     private final String errorMessage = "FAIL";
+    private DaoApartados myDaoA;
 
     @Context
     private UriInfo context;
@@ -35,6 +36,7 @@ public class ApartadosResource {
     public ApartadosResource() {
         daoApartado = new DaoApartados();
         apartado = new Apartado();
+        myDaoA = new DaoApartados();
     }
 
    @GET
@@ -65,14 +67,21 @@ public class ApartadosResource {
                 return errorMessage;
 
         }
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public String insert(Apartado apartado){
+//            if (daoApartado.insertRecord(apartado))
+//                return succesMessage;
+//            else
+//                return errorMessage;
+//    }
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public String insert(Apartado apartado){
-            if (daoApartado.insertRecord(apartado))
-                return succesMessage;
-            else
-                return errorMessage;
+    public long insert(Apartado apartado){
+        return myDaoA.insertRecordAndGetId(apartado);
     }
+    
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")

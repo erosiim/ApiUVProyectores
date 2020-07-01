@@ -19,7 +19,7 @@ public class DaoApartados implements IDao<Apartado>{
     private transient  Connection driverPostgres;
     private boolean successQuery = false;
     private transient  PreparedStatement preQuery;
-
+    private long key = -1L;
     public DaoApartados() {
         driverPostgres = ConnectionToDb.getInstance().getDriver();
     }
@@ -44,9 +44,12 @@ public class DaoApartados implements IDao<Apartado>{
                     preQuery.setInt(2, Integer.parseInt(values[1]));
                     preQuery.setInt(3, Integer.parseInt(values[2]));
                     preQuery.setString(4, values[3]);
-                    preQuery.setString(5, values[4]);
-                    preQuery.setString(6, values[5]);
-                    preQuery.setString(7, values[6]);
+                    preQuery.setDate(5, java.sql.Date.valueOf(values[4]));
+                    //preQuery.setDate(5, java.sql.Date.valueOf("2017-09-24"));
+                    preQuery.setTime(6, java.sql.Time.valueOf(values[5]));
+                    //preQuery.setTime(6, java.sql.Time.valueOf("08:00:00"));
+                    preQuery.setTime(7, java.sql.Time.valueOf(values[6]));
+                    //preQuery.setTime(7, java.sql.Time.valueOf("08:00:00"));
                     preQuery.setInt(8, Integer.parseInt(values[7]));
                     preQuery.setInt(9, Integer.parseInt(values[8]));
                     preQuery.setString(10, values[9]);
@@ -80,6 +83,61 @@ public class DaoApartados implements IDao<Apartado>{
         return successQuery;
     }
     
+    public long updateTableAndGetId(String statement,int statementOption, String[] values) {
+        try {
+            preQuery = driverPostgres.prepareStatement(statement, PreparedStatement.RETURN_GENERATED_KEYS);
+            switch(statementOption){
+                case 0:
+                    preQuery.setString(1, values[0]);
+                    preQuery.setInt(2, Integer.parseInt(values[1]));
+                    preQuery.setInt(3, Integer.parseInt(values[2]));
+                    preQuery.setString(4, values[3]);
+                    preQuery.setDate(5, java.sql.Date.valueOf(values[4]));
+                    //preQuery.setDate(5, java.sql.Date.valueOf("2017-09-24"));
+                    preQuery.setTime(6, java.sql.Time.valueOf(values[5]));
+                    //preQuery.setTime(6, java.sql.Time.valueOf("08:00:00"));
+                    preQuery.setTime(7, java.sql.Time.valueOf(values[6]));
+                    //preQuery.setTime(7, java.sql.Time.valueOf("08:00:00"));
+                    preQuery.setInt(8, Integer.parseInt(values[7]));
+                    preQuery.setInt(9, Integer.parseInt(values[8]));
+                    preQuery.setString(10, values[9]);
+                    //preQuery.setString(8, values[7]);
+                    break;
+                case 1:
+                    preQuery.setInt(1, Integer.parseInt(values[0]));
+                    break;
+                case 2:
+                    preQuery.setString(1,values[1]);
+                    preQuery.setInt(2,Integer.parseInt(values[2]));
+                    preQuery.setInt(3,Integer.parseInt(values[3]));
+                    preQuery.setString(4,values[4]);
+                    preQuery.setString(5,values[5]);
+                    preQuery.setString(6,values[6]);
+                    preQuery.setString(7,values[7]);
+                    preQuery.setInt(8, Integer.parseInt(values[7]));
+                    preQuery.setInt(9, Integer.parseInt(values[7]));
+                    preQuery.setString(10,values[7]);
+                    preQuery.setInt(11,Integer.parseInt(values[0]));
+                    break;
+                default:
+                    System.err.println("No elegiste una opción válida");
+            }
+            if(preQuery.executeUpdate()>0)
+                successQuery = true;
+            
+            ResultSet rs = preQuery.getGeneratedKeys();  
+            key = rs.next() ? rs.getInt(1) : 0;
+            if(key!=0){
+                System.out.println("Generated key="+key);
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionToDb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return key;
+    }
+    
      public ResultSet getData(String statement, int statementOption,int id) {
         ResultSet data = null;
         try {
@@ -95,8 +153,11 @@ public class DaoApartados implements IDao<Apartado>{
         return data;
     }
     
-    
-    
+    public long insertRecordAndGetId(Apartado t) {
+        String values [] = { t.getMatricula(), String.valueOf(t.getIdEquipo()), String.valueOf(t.getIdLugar()), t.getGrupo(), t.getFecha(), t.getHoraInicio(), t.getHoraFinal(),  String.valueOf(t.getCodigoConfirmacion()), String.valueOf(t.getCodigoDevolucion()), t.getEstado()};
+        return updateTableAndGetId(getStatement(0), 0, values);
+    }
+     
     @Override
     public boolean insertRecord(Apartado t) {
         String values [] = { t.getMatricula(), String.valueOf(t.getIdEquipo()), String.valueOf(t.getIdLugar()), t.getGrupo(), t.getFecha(), t.getHoraInicio(), t.getHoraFinal(),  String.valueOf(t.getCodigoConfirmacion()), String.valueOf(t.getCodigoDevolucion()), t.getEstado()};
