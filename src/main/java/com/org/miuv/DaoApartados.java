@@ -191,6 +191,7 @@ public class DaoApartados implements IDao<Apartado>{
                 apartado.setFecha(data.getString(6));
                 apartado.setHoraInicio(data.getString(7));
                 apartado.setHoraFinal(data.getString(8));
+                apartado.setEstado(data.getString(9));
                 listaApartados.add(apartado);
             }
         } catch (SQLException ex) {
@@ -212,6 +213,7 @@ public class DaoApartados implements IDao<Apartado>{
                 t.setFecha(data.getString(6));
                 t.setHoraInicio(data.getString(7));
                 t.setHoraFinal(data.getString(8));
+                t.setEstado(data.getString(9));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DaoApartados.class.getName()).log(Level.SEVERE, null, ex);
