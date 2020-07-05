@@ -66,9 +66,9 @@ public class DaoApartados implements IDao<Apartado>{
                     preQuery.setDate(5,java.sql.Date.valueOf(values[5]));
                     preQuery.setTime(6,java.sql.Time.valueOf(values[6]));
                     preQuery.setTime(7,java.sql.Time.valueOf(values[7]));
-                    preQuery.setInt(8, Integer.parseInt(values[7]));
-                    preQuery.setInt(9, Integer.parseInt(values[7]));
-                    preQuery.setString(10,values[7]);
+                    preQuery.setInt(8, Integer.parseInt(values[8]));
+                    preQuery.setInt(9, Integer.parseInt(values[9]));
+                    preQuery.setString(10,values[10]);
                     preQuery.setInt(11,Integer.parseInt(values[0]));
                     break;
                 default:
