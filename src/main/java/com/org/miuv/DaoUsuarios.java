@@ -70,7 +70,7 @@ public class DaoUsuarios implements IDao<Usuario>{
                     preQuery.setString(4,values[4]);
                     preQuery.setString(5,values[5]);
                     preQuery.setString(6,values[6]);
-                    preQuery.setString(7,values[6]);
+                    preQuery.setString(7,values[7]);
                     preQuery.setString(8,values[0]);
                     break;
                 default:
