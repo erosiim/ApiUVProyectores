@@ -123,6 +123,7 @@ public class DaoEquipos implements IDao<Equipo>{
                  t.setIdEquipo(data.getInt(1));
                  t.setIdTipoEquipo(data.getInt(2));
                  t.setSerial(data.getString(3));
+                 t.setEstado(data.getString(4));
              }} catch (SQLException ex) {
              Logger.getLogger(DaoEquipos.class.getName()).log(Level.SEVERE, null, ex);
          }
